@@ -25,6 +25,12 @@ const flyers: Flyer[] = [
 ]
 flyers.forEach(item => item.fly('East'))
 
+const weapon = new Weapon(1, 'Crossbow', 100)
+const weaponBis = new Weapon(1, 'Crossbow', 100)
+
+const equal = Weapon.compare(weapon, weaponBis)
+
+//#region  A part, pour gagner une pizza
 interface WithId {
     id: number
 }
@@ -36,8 +42,6 @@ interface WithLabel {
 interface WithLabelAndId extends WithLabel, WithId {
 }
 
-//#region  A part, pour gagner une pizza
-const weapon = new Weapon(1, 'Crossbow', 100)
 
 type PasWeapon = {
     id: number,
