@@ -2,6 +2,7 @@ import {MainCharacter} from './domains/game/models/main-character'
 import Enemy, {Droide, StormTrooper} from './domains/game/models/enemy'
 import { Direction } from './domains/game/models/directions'
 import { Flyer } from './domains/game/models/flyer'
+import {Weapon} from './domains/game/models/weapon'
 
 const character = new MainCharacter(1485)
 const character2 = new MainCharacter('Luke', 16)
@@ -23,3 +24,47 @@ const flyers: Flyer[] = [
     // new StormTrooper('XE15M00') // car pas implements
 ]
 flyers.forEach(item => item.fly('East'))
+
+interface WithId {
+    id: number
+}
+
+interface WithLabel {
+    label: string
+}
+
+interface WithLabelAndId extends WithLabel, WithId {
+}
+
+//#region  A part, pour gagner une pizza
+const weapon = new Weapon(1, 'Crossbow', 100)
+
+type PasWeapon = {
+    id: number,
+    label: string
+}
+
+type Sith = {
+    id: number,
+    label: string
+}
+
+function displayLabel(weapon: WithLabel) {
+    console.info(weapon.label)
+}
+
+displayLabel(weapon)
+
+const weapon2: Weapon = {
+    id: 1,
+    label: 'Crossbow',
+    power: 15
+}
+displayLabel(weapon2)
+
+const weapon3: PasWeapon = {
+    id: 1,
+    label: 'Crossbow'
+}
+displayLabel(weapon3)
+//#endregion
