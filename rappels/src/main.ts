@@ -3,10 +3,23 @@ import Enemy, {Droide, StormTrooper} from './domains/game/models/enemy'
 import { Direction } from './domains/game/models/directions'
 import { Flyer } from './domains/game/models/flyer'
 import {Weapon} from './domains/game/models/weapon'
+import DeathMatchFight from './domains/fights/models/death-match-fight'
 
 const character = new MainCharacter(1485)
 const character2 = new MainCharacter('Luke', 16)
 
+
+const fightMotor = new DeathMatchFight()
+fightMotor.run(character, { 
+    attack: (enemy) => enemy.updateLifePoint(50),
+    isAlive: true,
+    updateLifePoint: value => {
+    }
+})
+
+if(character.isAlive) {
+    console.info('youpi je suis en vie')
+}
 
 const enemies: Enemy[] = [
     new StormTrooper('XE15M00'),
@@ -29,6 +42,9 @@ const weapon = new Weapon(1, 'Crossbow', 100)
 const weaponBis = new Weapon(1, 'Crossbow', 100)
 
 const equal = Weapon.compare(weapon, weaponBis)
+
+
+
 
 //#region  A part, pour gagner une pizza
 interface WithId {
