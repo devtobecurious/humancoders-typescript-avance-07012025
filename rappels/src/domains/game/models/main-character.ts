@@ -18,3 +18,5 @@ export class MainCharacter {
     // constructor(private _surname: string) {   
     // }
 }
+
+
