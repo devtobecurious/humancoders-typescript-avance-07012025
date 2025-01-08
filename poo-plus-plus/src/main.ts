@@ -1,11 +1,11 @@
-import {MainCharacter} from './domains/game/models/main-character'
-import Enemy, {Droide, StormTrooper} from './domains/game/models/enemy'
-import { Direction } from './domains/game/models/directions'
-import { Flyer } from './domains/game/models/flyer'
-import {Weapon} from './domains/game/models/weapon'
 import DeathMatchFight from './domains/fights/models/death-match-fight'
-import {EnemyMachine} from './domains/game/applicatifs/enemy-machine'
+import { EnemyMachine } from './domains/game/applicatifs/enemy-machine'
 import { GetAllPeopleInfra } from './domains/game/infrastructures/get-all-people.infra'
+import { ApiResult } from './domains/game/infrastructures/models'
+import Enemy, { Droide, StormTrooper } from './domains/game/models/enemy'
+import { Flyer } from './domains/game/models/flyer'
+import { MainCharacter } from './domains/game/models/main-character'
+import { Weapon } from './domains/game/models/weapon'
 
 const character = new MainCharacter(1485)
 const character2 = new MainCharacter('Luke', 16)
@@ -46,11 +46,31 @@ const weaponBis = new Weapon(1, 'Crossbow', 100)
 const equal = Weapon.compare(weapon, weaponBis)
 
 
-const enemyMachine = new EnemyMachine(new GetAllPeopleInfra())
+// const enemyMachine = new EnemyMachine(new GetAllPeopleInfra())
+// const enemyMachine = new EnemyMachine({
+//     getAll: (url: string) => {
+//         return new Promise<ApiResult>(resolve => {
+//             resolve({
+//                 results: []
+//             })
+//         })
+//     }
+// })
+
+const fakeInfra: GetAllPeopleInfra = {
+    getAll: (url: string) => {
+        return new Promise<ApiResult>(resolve => {
+            resolve({
+                results: []
+            })
+        })
+    }
+}
+const enemyMachine = new EnemyMachine(fakeInfra)
+
 enemyMachine.load().then(items => {
     console.info(items.length)
 })
-
 
 
 //#region  A part, pour gagner une pizza

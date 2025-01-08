@@ -1,12 +1,13 @@
 import { ApiResult } from "./models";
+import {GetAllAsync} from "../applicatifs/get-all-result"
 
-export abstract class GetAll<T> {
+export abstract class GetAll<T> implements GetAllAsync<T> {
     async getAll(url: string): Promise<T> {
         const response = await fetch(url)
         const result = await response.json()
 
         return result;
-    }
+    }    
 }
 
 export class GetAllPeopleInfra extends GetAll<ApiResult> {

@@ -1,8 +1,9 @@
 import { GetAllPeopleInfra } from '../infrastructures/get-all-people.infra';
 import Enemy, { Droide, StormTrooper } from '../models/enemy'
+import { GetAllResult } from './get-all-result';
 
 export class EnemyMachine {
-    constructor(private service: GetAllPeopleInfra) {}
+    constructor(private service: GetAllResult) {}
 
     async load(): Promise<Enemy[]> {
          const result = await this.service.getAll('https://www.swapi.tech/api/people')
