@@ -1,11 +1,13 @@
 import DeathMatchFight from './domains/fights/models/death-match-fight'
 import { EnemyMachine } from './domains/game/applicatifs/enemy-machine'
+import { GetAllResult } from './domains/game/applicatifs/get-all-result'
 import { GetAllPeopleInfra } from './domains/game/infrastructures/get-all-people.infra'
 import { ApiResult } from './domains/game/infrastructures/models'
 import Enemy, { Droide, StormTrooper } from './domains/game/models/enemy'
 import { Flyer } from './domains/game/models/flyer'
 import { MainCharacter } from './domains/game/models/main-character'
 import { Weapon } from './domains/game/models/weapon'
+import {instanciate} from './tools/instanciate'
 
 const character = new MainCharacter(1485)
 const character2 = new MainCharacter('Luke', 16)
@@ -57,7 +59,7 @@ const equal = Weapon.compare(weapon, weaponBis)
 //     }
 // })
 
-const fakeInfra: GetAllPeopleInfra = {
+const fakeInfra: GetAllResult = {
     getAll: (url: string) => {
         return new Promise<ApiResult>(resolve => {
             resolve({
@@ -71,6 +73,8 @@ const enemyMachine = new EnemyMachine(fakeInfra)
 enemyMachine.load().then(items => {
     console.info(items.length)
 })
+
+const tryWeapon = instanciate(Weapon, 1, 'test', 12)
 
 
 //#region  A part, pour gagner une pizza
